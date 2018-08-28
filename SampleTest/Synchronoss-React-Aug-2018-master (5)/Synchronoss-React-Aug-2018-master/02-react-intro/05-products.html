@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Products</title>
+	<script src="react.js"></script>
+	<script src="react-dom.js"></script>
+	<script src="babel.min.js"></script>
+	<script type="text/babel">
+
+		class EventEmitter{
+			_listeners = [];
+
+			subscribe(listenerFn){
+				this._listeners.push(listenerFn);
+			}
+
+			triggerChange(){
+				this._listeners.forEach(listenerFn => listenerFn());
+			}
+		}
+
+
+		class ProductsCollection extends EventEmitter {
+			_list = [];
+
+			getAll(){
+				return [...this._list];
+			}
+
+			addNew(productName){
+				this._list.push(productName);
+				this.triggerChange();
+			}
+		}
+
+
+		class ProductList extends React.Component{
+			
+			
+			newProductName = '';
+
+			onAddNewClick = () => {
+				this.props.model.addNew(this.newProductName);
+			}
+			render(){
+				let products = this.props.model.getAll();
+				let productItems = products.map((product, index) => (<li key={index}>{product}</li>));
+
+				return(
+					<div>
+						<h1>Products</h1>
+						<hr/>
+						<label>Product Name :</label>
+						<input type="text" onChange={evt => this.newProductName = evt.target.value} />
+						<input type="button" value="Add New" onClick={this.onAddNewClick} />
+						<ol>
+							{productItems}
+						</ol>
+					</div>
+				)
+			}
+		}
+
+		class ProductsCount extends React.Component{
+			render(){
+				let { data } = this.props;
+				return(
+					<div>{data}</div>
+				)
+			}
+		}
+
+		class MyApp extends React.Component{
+			render(){
+				let { model } = this.props,
+					products = model.getAll(),
+					count = products.length;
+				return(
+					<div>
+						<ProductsCount data={count}/>
+						<ProductList model={model}/>
+					</div>
+				)
+			}
+		}
+
+		let productsCollectionModel = new ProductsCollection();
+
+		function renderApp(){
+			ReactDOM.render(
+				<MyApp model={productsCollectionModel} />,
+					document.getElementById('root'));
+		}
+		renderApp();
+		productsCollectionModel.subscribe(renderApp);
+	</script>
+</head>
+<body>
+	<div id="root"></div>
+</body>
+</html>
