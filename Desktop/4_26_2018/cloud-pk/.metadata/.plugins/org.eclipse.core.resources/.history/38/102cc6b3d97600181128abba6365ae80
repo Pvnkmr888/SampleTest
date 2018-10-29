@@ -1,0 +1,29 @@
+package com.crm.qa.Testcases;
+
+import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+
+import com.crm.qa.base.TestBase;
+import com.crm.qa.pages.LoginPage;
+
+public class LoginPageTest extends TestBase{
+	LoginPage loginpage;
+	
+	public LoginPageTest() {
+		super();
+	}
+@BeforeMethod
+public void setup() {
+	Initialization();
+	loginpage=new LoginPage();
+}
+
+@Test
+public void LoginPagetitlTest() {
+	String title= loginpage.validateLoginPageTitle();
+	Assert.assertEquals(title, "\"#1 Free CRM for Any Business: Online Customer Relationship Software\" ");
+}
+
+	
+}

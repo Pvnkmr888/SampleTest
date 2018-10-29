@@ -1,0 +1,7 @@
+
+public class Identifying_Duplicatenames {
+	
+	String course[]= {"java","javascript","Ruby","Python", "Java"};
+	
+
+}

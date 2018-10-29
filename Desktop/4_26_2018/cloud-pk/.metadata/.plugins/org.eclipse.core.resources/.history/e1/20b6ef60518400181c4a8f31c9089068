@@ -1,0 +1,10 @@
+
+public class Identifying_Duplicatenames {
+	
+	String course[]= {"java","javascript","Ruby","Python", "Java"};
+	public static void main(String args[]) {
+	System.out.println("*****************************");
+	
+	}
+
+}

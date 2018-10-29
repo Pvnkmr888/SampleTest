@@ -1,0 +1,63 @@
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class Identifying_Duplicatenames {
+	
+	
+	
+	public static void main(String args[]) {
+		String course[]= {"java","javascript","Ruby","Python", "java"};
+		
+	System.out.println("*****************************");
+	
+	for(int i=0; i<course.length;i++) {
+		for (int j=i+1;j<course.length;j++) {
+			if(course[i].equals(course[j])) {
+				System.out.println("duplicate element is -"+ course[i]);
+			}
+		}
+	}
+	
+	System.out.println("*****************************");
+	
+	Set<String> s=new HashSet<String>();
+	for (String names: course) {
+		if((s.add(names))==false){
+			
+			System.out.println("Duplicate element is- "+ names );
+		}
+	}
+	
+	
+	System.out.println("*****************************");
+	
+	Map<String,Integer> M= new HashMap<String,Integer>();
+	
+	for(String names: course) {
+		Integer count =M.get(names);
+		if(count == null) {
+			M.put(names, 1);
+		}
+		else {
+			M.put(names, ++count);
+		}
+		
+		//get the values from this map
+		
+		Set<Entry<String,Integer>> entryset= M.entrySet();
+		for(Entry<String,Integer> entry:entryset) {
+			
+			
+			
+		}
+			
+		
+		
+	}
+	
+ 	}
+
+}
